@@ -1,8 +1,18 @@
 #!/usr/bin/env python
+#encoding: utf-8
 
-C = float(raw_input())
+def main():
+    
+    C = float(raw_input())
 
-F = (9. * C / 5.)  +  32.
+    F = (9. * C / 5.)  +  32.
 
-print F
+    print F
+
+
+#
+# Call main() if the program is not being used as a module
+#
+if (__name__ == "__main__"):
+    main()
 
