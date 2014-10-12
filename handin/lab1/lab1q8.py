@@ -6,7 +6,7 @@ import math
 
 def main():
     
-    r = float(raw_input())
+    r = float(input())
     
     print math.pi * r * r
 

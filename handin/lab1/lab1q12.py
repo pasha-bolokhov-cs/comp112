@@ -4,11 +4,11 @@
 
 def main():
 
-    s = float(raw_input())
-    e = float(raw_input())
+    s = float(input())
+    e = float(input())
     
-    sf = float(raw_input())
-    ef = float(raw_input())
+    sf = float(input())
+    ef = float(input())
     
     print (sf - ef) / (e - s)
 

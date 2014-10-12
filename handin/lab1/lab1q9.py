@@ -4,8 +4,8 @@
 
 def main():
     
-    n = int(raw_input())
-    d = int(raw_input())
+    n = int(input())
+    d = int(input())
     
     print float(n) / float(d)
 

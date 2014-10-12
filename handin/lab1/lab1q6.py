@@ -6,8 +6,8 @@ import math
 
 def main():
     
-    a = float(raw_input())
-    b = float(raw_input())
+    a = float(input())
+    b = float(input())
     
     print math.sqrt(a * a  +  b * b)
 

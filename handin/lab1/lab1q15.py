@@ -6,7 +6,7 @@ import math
 
 def main():
     
-    L = float(raw_input())
+    L = float(input())
     
     print 1.34 * math.pow(L, 0.5)
 

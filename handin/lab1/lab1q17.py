@@ -6,12 +6,12 @@ import math
 
 def main():
 
-    P = int(raw_input())
+    P = int(input())
     
-    R = float(raw_input())
+    R = float(input())
     R = R / 12.
     
-    t = int(raw_input())
+    t = int(input())
     T = float(t) * 12.
     
     print "%.2f"  %  ( ( P * R * math.pow(1 + R, T) ) / ( math.pow(1 + R, T) - 1 ) )

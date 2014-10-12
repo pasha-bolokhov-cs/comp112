@@ -4,7 +4,7 @@
 
 def main():
     
-    c = float(raw_input())
+    c = float(input())
     u = c / 1.12
     
     

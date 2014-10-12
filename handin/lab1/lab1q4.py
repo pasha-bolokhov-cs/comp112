@@ -4,8 +4,8 @@
 
 def main():
     
-    l = float(raw_input())
-    w = float(raw_input())
+    l = float(input())
+    w = float(input())
     
     print l * w
 

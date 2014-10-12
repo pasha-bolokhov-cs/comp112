@@ -3,7 +3,7 @@
 
 def main():
     
-    C = float(raw_input())
+    C = float(input())
 
     F = (9. * C / 5.)  +  32.
 

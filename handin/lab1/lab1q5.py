@@ -4,8 +4,8 @@
 
 def main():
     
-    h = float(raw_input())
-    b = float(raw_input())
+    h = float(input())
+    b = float(input())
     
     print h * b / 2.
 

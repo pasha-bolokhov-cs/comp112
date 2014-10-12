@@ -4,7 +4,7 @@
 
 def main():
     
-    s = float(raw_input())
+    s = float(input())
     
     print s * s
 

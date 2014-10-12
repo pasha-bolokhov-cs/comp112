@@ -4,9 +4,9 @@
 
 def main():
 
-    a = float(raw_input())
-    b = float(raw_input())
-    c = float(raw_input())
+    a = float(input())
+    b = float(input())
+    c = float(input())
     
     print ( a + b + c ) / 3.
 
