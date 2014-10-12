@@ -238,44 +238,35 @@ def main():
              "q7": 1,   "q8": 1,   "q9": 2,   "q10": 3,  "q11": 2, "q12": 4,
              "q13": 1,  "q14": 2,  "q15": 1,  "q16": 3,  "q17": 3}
 
-    # type of each argument to each function
-    targs = {"q1":  Q1,
-             "q2":  Q2,
-             "q3":  Q3,
-             "q4":  Q4,
-             "q5":  Q5,
-             "q6":  Q6,
-             "q7":  Q7,
-             "q8":  Q8,
-             "q9":  Q9,
-             "q10": Q10,
-             "q11": Q11,
-             "q12": Q12,
-             "q13": Q13,
-             "q14": Q14,
-             "q15": Q15,
-             "q16": Q16,
-             "q17": Q17}
+    # map of functions, number and types of their arguments
+    targs = {"q1":  [Q1,  1, [float]],
+             "q2":  [Q2,  1, [float]],
+             "q3":  [Q3,  1, [float]],
+             "q4":  [Q4,  2, [float, float]],
+             "q5":  [Q5,  2, [float, float]],
+             "q6":  [Q6,  2, [float, float]],
+             "q7":  [Q7,  1, [float]],
+             "q8":  [Q8,  1, [float]],
+             "q9":  [Q9,  2, [int, int]],
+             "q10": [Q10, 3, [float, float, float]],
+             "q11": [Q11, 2, [int, int]],
+             "q12": [Q12, 4, [float, float, float, float]],
+             "q13": [Q13, 1, [float]],
+             "q14": [Q14, 2, [float, float]],
+             "q15": [Q15, 1, [float]],
+             "q16": [Q16, 3, [float, float, int]],
+             "q17": [Q17, 3, [int, float, int, float]]}
 
-    # map of functions, number and types of its arguments
-    targs = {"q1":  [Q1,  
-             "q2":  [Q2,  
-             "q3":  [Q3,  
-             "q4":  [Q4,  
-             "q5":  [Q5,  
-             "q6":  [Q6,  
-             "q7":  [Q7,  
-             "q8":  [Q8,  
-             "q9":  [Q9,  
-             "q10": [Q10, 
-             "q11": [Q11, 
-             "q12": [Q12, 
-             "q13": [Q13, 
-             "q14": [Q14, 
-             "q15": [Q15, 
-             "q16": [Q16, 
-             "q17": [Q17  
-                     }
+    # get a function name from the argv
+    if len(sys.argv) - 1 == 0:
+        sys.stderr.write("Need to supply a question, e.g. \"q1\", \"q2\", ...\n")
+        exit(1)
+    request = sys.argv[1]
+
+    if request not in targs:
+        sys.stderr.write("Unrecognized function: `%s'\n" % request)
+        exit(1)
+
 
 
 #
