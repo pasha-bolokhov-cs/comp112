@@ -219,16 +219,20 @@ def main():
     # call the actual function
     returns = quest(*args)
     
-    # make a list if this was just one return value
-    if type(returns) != type([]):
+    # make a list
+    if type(returns) != type(()):
         results = [returns]
+    else:
+        results = list(returns)
 
     # print out all results in the correct format
     for r in xrange(len(formats)):
         if formats[r] == "!":
-            print results[r]
+            print results[r]                         # no formatting is needed
         else:
             print formats[r] % results[r]
+
+
 
 
 #
