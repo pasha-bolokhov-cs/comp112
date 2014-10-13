@@ -14,7 +14,7 @@ if [ "x$HOSTNAME" != "x$csthost" ]; then
 fi
 
 # 'core.filemode' should be set to false
-if [ "x$(git config core.filemode)" != "xfalse" ];
+if [ "x$(git config core.filemode)" != "xfalse" ]; then
 	echo "Set 'core.filemode' to false to make Git ignore permission changes" 1>&2
 	exit 1
 fi
