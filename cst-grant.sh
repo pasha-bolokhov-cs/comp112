@@ -16,3 +16,6 @@ else
 	exit 1
 fi
 
+# Git changes mode to 674 for some reason
+chmod -R 755 .
+
