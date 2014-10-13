@@ -13,10 +13,11 @@ if [ "x$HOSTNAME" != "x$csthost" ]; then
 	exit 1
 fi
 
+
 # 'core.filemode' should be set to false
 if [ "x$(git config core.filemode)" != "xfalse" ]; then
-	echo "Set 'core.filemode' to \"false\" to make Git ignore permission changes" 1>&2
-	exit 1
+	echo "Setting 'core.filemode' to \"false\" to make Git ignore permission changes" 1>&2
+	git config core.filemode false || exit 1
 fi
 
 setfacl    -m u:${cstinstructor}:x   ~
