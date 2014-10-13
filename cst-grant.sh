@@ -20,7 +20,7 @@ if [ "x$(git config core.filemode)" != "xfalse" ]; then
 fi
 
 # Git changes mode to 674 for some reason
-chmod -R 755 .
+chmod -R go-w .
 
 setfacl    -m u:${cstinstructor}:x   ~
 setfacl    -m u:${cstinstructor}:x   .
