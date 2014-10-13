@@ -19,9 +19,6 @@ if [ "x$(git config core.filemode)" != "xfalse" ]; then
 	exit 1
 fi
 
-# Git changes mode to 674 for some reason
-chmod -R go-w .
-
 setfacl    -m u:${cstinstructor}:x   ~
 setfacl    -m u:${cstinstructor}:x   .
 setfacl -R -m u:${cstinstructor}:rwx handin
