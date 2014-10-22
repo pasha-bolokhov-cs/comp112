@@ -23,4 +23,5 @@ fi
 setfacl    -m u:${cstinstructor}:x   ~
 setfacl    -m u:${cstinstructor}:x   .
 setfacl -R -m u:${cstinstructor}:rwx handin
+setfacl -R -m m:rwx                  handin
 
