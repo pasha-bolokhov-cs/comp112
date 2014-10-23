@@ -1,10 +1,17 @@
 #!/usr/bin/env python
 #encoding: utf-8
 
-import math
+import math, sys
 
 
+#
+# xrange() is replaced by range() in Python 3
+#
+if (sys.hexversion >= 0x300000):
+    def xrange(stop):
+        return range(stop)
 
+    
 
 def fib(n):
     """
@@ -13,10 +20,10 @@ def fib(n):
 
     prev = 0
     curr = 1
-    k = 1
-    while k < n:
+
+    # won't work in python3
+    for k in xrange(n-1):
         prev, curr = curr, curr + prev
-        k += 1
 
     return curr
 
@@ -140,9 +147,9 @@ def main():
     # print out all results in the correct format
     for r in xrange(len(formats)):
         if formats[r] == "!":
-            print results[r]                         # no formatting is needed
+            print(results[r])                         # no formatting is needed
         else:
-            print formats[r] % results[r]
+            print(formats[r] % results[r])
 
 
 
@@ -151,6 +158,5 @@ def main():
 # Call main() if the program is not being used as a module
 #
 if (__name__ == "__main__"):
-    import sys
     main()
 
