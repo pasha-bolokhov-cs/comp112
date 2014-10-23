@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #encoding: utf-8
 
-import sys, math
+import math
 
 
 
@@ -151,5 +151,6 @@ def main():
 # Call main() if the program is not being used as a module
 #
 if (__name__ == "__main__"):
+    import sys
     main()
 
