@@ -11,16 +11,11 @@ def fib(n):
     Fibonacci
     """
 
-    if n == 1:
-        return 1
-    
-    pprev = 0
-    prev = 1
+    prev = 0
+    curr = 1
     k = 1
     while k < n:
-        curr = prev + pprev
-        pprev = prev
-        prev = curr
+        prev, curr = curr, curr + prev
         k += 1
 
     return curr
