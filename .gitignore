@@ -1,0 +1,6 @@
+# Ignore editor backups
+*~
+
+# Instructor creates "freeze_" subdirectories with timestamps
+freeze_*/
+
