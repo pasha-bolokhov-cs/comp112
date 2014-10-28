@@ -61,11 +61,21 @@ def mergesort(L1, L2):
 
 
 
-def Q3(s):
+def triangle(h):
     """
-    Question 3
+    Print a triangle of height 'h'
     """
-    return s * s
+
+    if (h <= 0):
+        return
+
+    for k in xrange(h):
+        # print 'k + 1' asterisks
+        for m in xrange(k + 1):
+            print "*",
+        
+        # do the linefeed
+        print
 
 
 
@@ -125,7 +135,7 @@ def main():
     #
     targs = {"q1":  [fib,        [int],                        ["!"]],
              "q2":  [mergesort,  [list, list],                 ["!"]],
-             "q3":  [Q3,         [float],                      ["!"]],
+             "q3":  [triangle,   [int],                        []],
              "q4":  [Q4,         [float, float],               ["!"]],
              "q5":  [Q5,         [float, float],               ["!"]],
              "q6":  [Q6,         [float, float],               ["!"]],
@@ -157,9 +167,9 @@ def main():
     
     # call the actual function
     returns = quest(*args)
-    
+
     #
-    # some functions return one value, whereas others return a few
+    # if a function returns a single value
     # we convert it to a list anyway
     #
     if type(returns) != type(()):
