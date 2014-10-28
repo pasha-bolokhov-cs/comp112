@@ -30,13 +30,33 @@ def fib(n):
 
 
 
-def Q2(F):
+def mergesort(L1, L2):
     """
-    Question 2
+    Merge Sort algorithm
+    Assume that the lists are sorted
     """
-    C = ( F  -  32. ) * 5. / 9.
+    res = []
+    h1 = 0
+    h2 = 0
+    l1 = len(L1)
+    l2 = len(L2)
+
+    # run until one of the pointers hits the end
+    while (h1 < l1) and (h2 < l2):
+        if (L1[h1] <= L2[h2]):
+            res.append(L1[h1])
+            h1 += 1
+        else:
+            res.append(L2[h2])
+            h2 += 1
     
-    return C
+    # check if one of the lists wasn't completed
+    if (h1 < l1):
+        res.extend(L1[h1:])
+    elif (h2 < l2):
+        res.extend(L2[h2:])
+
+    return res
 
 
 
@@ -103,14 +123,14 @@ def main():
     # map of functions, number and types of their arguments,
     # and output formats for its return values
     #
-    targs = {"q1":  [fib, [int],                        ["!"]],
-             "q2":  [Q2,  [float],                      ["!"]],
-             "q3":  [Q3,  [float],                      ["!"]],
-             "q4":  [Q4,  [float, float],               ["!"]],
-             "q5":  [Q5,  [float, float],               ["!"]],
-             "q6":  [Q6,  [float, float],               ["!"]],
-             "q7":  [Q7,  [float],                      ["!"]],
-             "q8":  [Q8,  [float],                      ["!"]]};
+    targs = {"q1":  [fib,        [int],                        ["!"]],
+             "q2":  [mergesort,  [list, list],                 ["!"]],
+             "q3":  [Q3,         [float],                      ["!"]],
+             "q4":  [Q4,         [float, float],               ["!"]],
+             "q5":  [Q5,         [float, float],               ["!"]],
+             "q6":  [Q6,         [float, float],               ["!"]],
+             "q7":  [Q7,         [float],                      ["!"]],
+             "q8":  [Q8,         [float],                      ["!"]]};
 
     # get a function name from 'argv'
     if len(sys.argv) - 1 == 0:
@@ -138,7 +158,10 @@ def main():
     # call the actual function
     returns = quest(*args)
     
-    # make a list
+    #
+    # some functions return one value, whereas others return a few
+    # we convert it to a list anyway
+    #
     if type(returns) != type(()):
         results = [returns]
     else:
