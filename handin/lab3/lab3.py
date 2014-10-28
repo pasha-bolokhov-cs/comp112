@@ -80,47 +80,117 @@ def triangle(h):
 
 
 
-def Q4(l, w):
+def triangle_r(h):
     """
-    Question 4
+    Print a triangle recursively
     """
-    return l * w
+    
+    if (h <= 0):
+        return
+
+    # a smaller triangle
+    triangle_r(h - 1)
+    
+    # the base - 'h' asterisks
+    for k in xrange(h):
+        print "*",
+
+    # linefeed
+    print
 
 
 
 
-def Q5(h, b):
+def fliptri(h):
     """
-    Question 5
+    Print a right-left flipped triangle
     """
-    return h * b / 2.
+    if (h <= 0): return
+
+    for k in xrange(h):
+        # print spaces
+        for m in xrange(h - k - 1):
+            print " ",
+
+        # print 'k + 1' asterisks
+        for m in xrange(k + 1):
+            print "*",
+        
+        # do the linefeed
+        print
 
 
 
 
-def Q6(a, b):
+def fliptri_int(h, p):
     """
-    Question 6
+    Internal recursive right-left flipped triangle
+    'h' is the height
+    'p' is the padding on the left
     """
-    return math.sqrt(a * a  +  b * b)
+
+    if (h <= 0): return
+
+    # a smaller triangle with a greater padding
+    fliptri_int(h - 1, p + 1)
+
+    # padding
+    for k in xrange(p):
+        print " ", 
+
+    # base
+    for k in xrange(h):
+        print "*",
+
+    # linefeed
+    print
 
 
 
 
-def Q7(r):
+def fliptri_r(h):
     """
-    Question 7
+    Recursive right-left flipped triangle of height 'h'
     """
-    return 2. * math.pi * r
+
+    fliptri_int(h, 0)
 
 
 
 
-def Q8(r):
+def gcd(x, y):
     """
-    Question 8
+    Greatest Common Divisor
+    Euclid's method
+
+    It is implied that both 'x' and 'y' are strictly positive
     """
-    return math.pi * r * r
+
+    #
+    # No need to handle x < y case, as the algorithm
+    # will flip them
+    #
+    R = x % y
+    while (R > 0):
+        x, y = y, R
+        R = x % y
+
+    return y
+
+
+
+
+def gcd_r(x, y):
+    """
+    Greatest Common Divisor, recursive version
+    Euclid's method
+    """
+
+    R = x % y
+    if (R == 0):
+        return y
+
+    return gcd_r(y, R)
 
 
 
@@ -135,12 +205,12 @@ def main():
     #
     targs = {"q1":  [fib,        [int],                        ["!"]],
              "q2":  [mergesort,  [list, list],                 ["!"]],
-             "q3":  [triangle,   [int],                        []],
-             "q4":  [Q4,         [float, float],               ["!"]],
-             "q5":  [Q5,         [float, float],               ["!"]],
-             "q6":  [Q6,         [float, float],               ["!"]],
-             "q7":  [Q7,         [float],                      ["!"]],
-             "q8":  [Q8,         [float],                      ["!"]]};
+             "q3":  [triangle,   [int],                        []   ],
+             "q4":  [triangle_r, [int],                        []   ],
+             "q5":  [fliptri,    [int],                        []   ],
+             "q6":  [fliptri_r,  [int],                        []   ],
+             "q7":  [gcd,        [int, int],                   ["!"]],
+             "q8":  [gcd_r,      [int, int],                   ["!"]]};
 
     # get a function name from 'argv'
     if len(sys.argv) - 1 == 0:
