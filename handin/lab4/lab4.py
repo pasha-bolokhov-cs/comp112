@@ -83,136 +83,27 @@ def is_prime(n):
 
 
 
-def triangle(h):
+def is_perfect(n):
     """
-    Print a triangle of height 'h'
-    """
-
-    if (h <= 0):
-        return
-
-    for k in xrange(h):
-        # print 'k + 1' asterisks
-        for m in xrange(k + 1):
-            sys.stdout.write("*")
-        
-        # do the linefeed
-        sys.stdout.write("\n")
-
-
-
-
-def triangle_r(h):
-    """
-    Print a triangle recursively
-    """
-    
-    if (h <= 0):
-        return
-
-    # a smaller triangle
-    triangle_r(h - 1)
-    
-    # the base - 'h' asterisks
-    for k in xrange(h):
-        sys.stdout.write("*")
-
-    # linefeed
-    sys.stdout.write("\n")
-
-
-
-
-def fliptri(h):
-    """
-    Print a right-left flipped triangle
-    """
-    if (h <= 0): return
-
-    for k in xrange(h):
-        # print spaces
-        for m in xrange(h - k - 1):
-            sys.stdout.write(" ")
-
-        # print 'k + 1' asterisks
-        for m in xrange(k + 1):
-            sys.stdout.write("*")
-        
-        # do the linefeed
-        sys.stdout.write("\n")
-
-
-
-
-def fliptri_int(h, p):
-    """
-    Internal recursive right-left flipped triangle
-    'h' is the height
-    'p' is the padding on the left
+    Determines whether 'n' is a "perfect", "abundant" or a "deficient" number
     """
 
-    if (h <= 0): return
+    # Initial small numbers
+    if (n in [1, 2, 3, 4, 5]):
+        return "deficient"
 
-    # a smaller triangle with a greater padding
-    fliptri_int(h - 1, p + 1)
+    sum = 0
+    for d in xrange(n - 1):
+        # 'd + 1' ranges from '1' to 'n - 1'
+        if (divisible(n, d + 1)):
+            sum += d + 1
 
-    # padding
-    for k in xrange(p):
-        sys.stdout.write(" ")
-
-    # base
-    for k in xrange(h):
-        sys.stdout.write("*")
-
-    # linefeed
-    sys.stdout.write("\n")
-
-
-
-
-def fliptri_r(h):
-    """
-    Recursive right-left flipped triangle of height 'h'
-    """
-
-    fliptri_int(h, 0)
-
-
-
-
-def gcd(x, y):
-    """
-    Greatest Common Divisor
-    Euclid's method
-
-    It is implied that both 'x' and 'y' are strictly positive
-    """
-
-    #
-    # No need to handle x < y case, as the algorithm
-    # will flip them
-    #
-    R = x % y
-    while (R > 0):
-        x, y = y, R
-        R = x % y
-
-    return y
-
-
-
-
-def gcd_r(x, y):
-    """
-    Greatest Common Divisor, recursive version
-    Euclid's method
-    """
-
-    R = x % y
-    if (R == 0):
-        return y
-
-    return gcd_r(y, R)
+    if (sum > n):
+        return "abundant"
+    if (sum == n):
+        return "perfect"
+    if (sum < n):
+        return "deficient"
 
 
 
@@ -227,12 +118,7 @@ def main():
     #
     targs = {"q1":  [timediff,   [int, int],                   ["!"]],
              "q2":  [is_prime,   [int],                        ["!"]],
-             "q3":  [triangle,   [int],                        []   ],
-             "q4":  [triangle_r, [int],                        []   ],
-             "q5":  [fliptri,    [int],                        []   ],
-             "q6":  [fliptri_r,  [int],                        []   ],
-             "q7":  [gcd,        [int, int],                   ["!"]],
-             "q8":  [gcd_r,      [int, int],                   ["!"]]};
+             "q3":  [is_perfect, [int],                        ["!"]]};
 
     # get a function name from 'argv'
     if len(sys.argv) - 1 == 0:
