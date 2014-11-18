@@ -94,10 +94,10 @@ def triangle(h):
     for k in xrange(h):
         # print 'k + 1' asterisks
         for m in xrange(k + 1):
-            print "*",
+            sys.stdout.write("*")
         
         # do the linefeed
-        print
+        sys.stdout.write("\n")
 
 
 
@@ -115,10 +115,10 @@ def triangle_r(h):
     
     # the base - 'h' asterisks
     for k in xrange(h):
-        print "*",
+        sys.stdout.write("*")
 
     # linefeed
-    print
+    sys.stdout.write("\n")
 
 
 
@@ -132,14 +132,14 @@ def fliptri(h):
     for k in xrange(h):
         # print spaces
         for m in xrange(h - k - 1):
-            print " ",
+            sys.stdout.write(" ")
 
         # print 'k + 1' asterisks
         for m in xrange(k + 1):
-            print "*",
+            sys.stdout.write("*")
         
         # do the linefeed
-        print
+        sys.stdout.write("\n")
 
 
 
@@ -158,14 +158,14 @@ def fliptri_int(h, p):
 
     # padding
     for k in xrange(p):
-        print " ", 
+        sys.stdout.write(" ")
 
     # base
     for k in xrange(h):
-        print "*",
+        sys.stdout.write("*")
 
     # linefeed
-    print
+    sys.stdout.write("\n")
 
 
 
@@ -272,9 +272,9 @@ def main():
     # print out all results in the correct format
     for r in xrange(len(formats)):
         if formats[r] == "!":
-            print(results[r])                         # no formatting is needed
+            sys.stdout.write(str(results[r]) + "\n")               # no formatting is needed
         else:
-            print(formats[r] % results[r])
+            sys.stdout.write(str(formats[r] % results[r]) + "\n")
 
 
 
