@@ -46,33 +46,39 @@ def timediff(t1, t2):
 
 
 
-def mergesort(L1, L2):
+def divisible(n, d):
     """
-    Merge Sort algorithm
-    Assume that the lists are sorted
+    Determines if 'n' is divisible by 'd'
     """
-    res = []
-    h1 = 0
-    h2 = 0
-    l1 = len(L1)
-    l2 = len(L2)
 
-    # run until one of the pointers hits the end
-    while (h1 < l1) and (h2 < l2):
-        if (L1[h1] <= L2[h2]):
-            res.append(L1[h1])
-            h1 += 1
-        else:
-            res.append(L2[h2])
-            h2 += 1
-    
-    # check if one of the lists wasn't completed
-    if (h1 < l1):
-        res.extend(L1[h1:])
-    elif (h2 < l2):
-        res.extend(L2[h2:])
+    return ((n / d) * d == n)
 
-    return res
+
+
+
+def is_prime(n):
+    """
+    Determines if 'n' is a prime number
+    """
+
+    # Initial small numbers
+    if (n in [1, 4, 6, 8, 9, 10]):
+        return False
+    if (n in [2, 3, 5, 7]):
+        return True
+
+    # Calculate the square root
+    s = int(round(math.sqrt(float(n))))
+
+    #
+    # 'xrange' runs from '0' to 's-1'
+    # the divisors range from '2' to '\sqrt{n} + 1'
+    #
+    for d in xrange(s):
+        if (divisible(n, d + 2)):
+            return False
+
+    return True
 
 
 
@@ -220,7 +226,7 @@ def main():
     # and output formats for its return values
     #
     targs = {"q1":  [timediff,   [int, int],                   ["!"]],
-             "q2":  [mergesort,  [list, list],                 ["!"]],
+             "q2":  [is_prime,   [int],                        ["!"]],
              "q3":  [triangle,   [int],                        []   ],
              "q4":  [triangle_r, [int],                        []   ],
              "q5":  [fliptri,    [int],                        []   ],
