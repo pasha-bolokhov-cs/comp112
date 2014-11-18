@@ -254,7 +254,7 @@ def main():
 
     # get the input and convert if necessary
     for a in types:
-        value = input()
+        value = sys.stdin.readline().rstrip('\n')
         args.append(a(value))
     
     # call the actual function
