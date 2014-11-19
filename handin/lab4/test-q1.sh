@@ -7,7 +7,7 @@ while :; do
 	if [ "x$code" != "x0" ]; then
 		exit
 	fi
-	res=$(echo -e "$t1\n$t2" | ./lab4.py q1)
+	res=$( { echo "${t1}"; echo "${t2}"; } | ./lab4.py q1)
 	if [ "x$res" != "x$d" ]; then
 		echo "Mismatch: $t1 $t2 expect $d actual $res" 1>&2
 	fi

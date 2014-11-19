@@ -27,8 +27,8 @@ def timediff(t1, t2):
         t2 += 2400
 
     # Extract minutes and hours from each time
-    h1 = t1 / 100
-    h2 = t2 / 100
+    h1 = int(t1 / 100)             # python3 does division exactly
+    h2 = int(t2 / 100)             # even when 't1' and 't2' are integers
     m1 = t1 % 100
     m2 = t2 % 100
 
@@ -51,7 +51,8 @@ def divisible(n, d):
     Determines if 'n' is divisible by 'd'
     """
 
-    return ((n / d) * d == n)
+    # python3 will return True always unless we convert to 'int'
+    return (int(n / d) * d == n)
 
 
 
