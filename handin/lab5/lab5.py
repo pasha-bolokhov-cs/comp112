@@ -41,16 +41,12 @@ def main():
     for line in fin:
         # split 'line' into fields
         fields = line.rstrip('\n').split(',')
-        n_arr = []
-        v_arr = []
         rec = {}
         for f in fields:
             # split each field into 'name' and 'value'
             assign = f.split('=')
             name = assign[0].strip(' ')
             value = assign[1].strip(' ')
-            n_arr.append(name)
-            v_arr.append(value)
             
             # update the maximum length
             if ((not maxlengths.has_key(name)) or (len(name) > maxlengths[name])):
