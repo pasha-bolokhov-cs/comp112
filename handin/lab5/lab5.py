@@ -17,57 +17,32 @@ def main():
     """
     Main function
     """
-    #
-    # map of functions, number and types of their arguments,
-    # and output formats for its return values
-    #
-    targs = {"q1":  [timediff,   [int, int],                   ["!"]],
-             "q2":  [is_prime,   [int],                        ["!"]],
-             "q3":  [is_perfect, [int],                        ["!"]]};
 
-    # get a function name from 'argv'
-    if len(sys.argv) - 1 == 0:
-        sys.stderr.write("Need to supply a question, e.g. \"q1\", \"q2\", ...\n")
-        exit(1)
-    request = sys.argv[1]
-
-    if request not in targs:
-        sys.stderr.write("Unrecognized function: `%s'\n" % request)
+    # Check if we have proper arguments
+    if (len(sys.argv) - 1 < 2):
+        sys.stderr.write("format: %s <in-file> <out-file>\n" % sys.argv[0])
         exit(1)
 
-    # find the function and its arguments
-    quest = targs[request][0]
-    types = targs[request][1]
-    nargs = len(types)
-    formats = targs[request][2]
-    nres = len(formats)
-    args = []
+    # Open input and output files
+    try:
+        fin = open(sys.argv[1], "r")
+    except IOError as e:
+        sys.stderr.write("can't open `%s': %s\n" % (sys.argv[1], e.strerror))
+        exit(2)
+    try:
+        fout = open(sys.argv[2], "w")
+    except IOError as e:
+        sys.stderr.write("can't open `%s': %s\n" % (sys.argv[2], e.strerror))
+        exit(2)
 
-    # get the input and convert if necessary
-    for a in types:
-        value = sys.stdin.readline().rstrip('\n')
-        args.append(a(value))
-    
-    # call the actual function
-    returns = quest(*args)
-
-    #
-    # if a function returns a single value
-    # we convert it to a list anyway
-    #
-    if type(returns) != type(()):
-        results = [returns]
-    else:
-        results = list(returns)
-
-    # print out all results in the correct format
-    for r in xrange(len(formats)):
-        if formats[r] == "!":
-            sys.stdout.write(str(results[r]) + "\n")               # no formatting is needed
-        else:
-            sys.stdout.write(str(formats[r] % results[r]) + "\n")
+    # Process the input file
+    for line in fin:
+        sys.stdout.write(line)
 
 
+    # Close the files
+    fout.close()
+    fin.close()
 
 
 #
