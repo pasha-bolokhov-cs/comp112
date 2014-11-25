@@ -36,9 +36,37 @@ def main():
         exit(2)
 
     # Process the input file
+    records = {}
+    maxlengths = {}
     for line in fin:
-        sys.stdout.write(line)
+        # split 'line' into fields
+        fields = line.rstrip('\n').split(',')
+        n_arr = []
+        v_arr = []
+        rec = {}
+        for f in fields:
+            # split each field into 'name' and 'value'
+            assign = f.split('=')
+            name = assign[0].strip(' ')
+            value = assign[1].strip(' ')
+            n_arr.append(name)
+            v_arr.append(value)
+            
+            # update the maximum length
+            if (maxlengths.has_key(name)):
+                if (len(name) > maxlengths[name]):
+                    maxlengths[name] = len(name)
+                if (len(value) > maxlengths[name]):
+                    maxlengths[name] = len(value)
+            
+            # check if found the name assignment
+            if (name == "name"):
+                line_name = value
+            else:
+                rec[name] = value
 
+        # update the dictionary
+        records[line_name] = rec
 
     # Close the files
     fout.close()
