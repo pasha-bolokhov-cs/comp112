@@ -53,11 +53,10 @@ def main():
             v_arr.append(value)
             
             # update the maximum length
-            if (maxlengths.has_key(name)):
-                if (len(name) > maxlengths[name]):
-                    maxlengths[name] = len(name)
-                if (len(value) > maxlengths[name]):
-                    maxlengths[name] = len(value)
+            if ((not maxlengths.has_key(name)) or (len(name) > maxlengths[name])):
+                maxlengths[name] = len(name)
+            if (len(value) > maxlengths[name]):
+                maxlengths[name] = len(value)
             
             # check if found the name assignment
             if (name == "name"):
@@ -66,11 +65,47 @@ def main():
                 rec[name] = value
 
         # update the dictionary
+        if (records.has_key(line_name)):
+            sys.stderr.write("name `%s' occurs more than once" % line_name)
+            exit(1)
         records[line_name] = rec
 
-    # Close the files
-    fout.close()
+    # Close the input file
     fin.close()
+
+    # Sort the field names
+    sorted_fields = sorted(maxlengths)
+
+    # Print the header
+    line = ("%" + str(maxlengths["name"]) + "s  ") % "name"
+    for n in sorted_fields:
+        if ((n != "name") and (n != "address")):
+            line += ("%" + str(maxlengths[n]) + "s  ") % n
+    line += ("%" + str(maxlengths["address"]) + "s\n") % "address"
+    fout.write(line)
+
+    # Sort the dictionary
+    sorted_records = sorted(records)
+    for name in sorted_records:
+        line = ("%" + str(maxlengths["name"]) + "s  ") % name
+        for f in sorted_fields:
+            if ((f != "name") and (f != "address")):
+                if (records[name].has_key(f)):
+                    line += ("%" + str(maxlengths[f]) + "s  ") % records[name][f]
+                else:
+                    line += ("%" + str(maxlengths[f]) + "s  ") % ""
+        # address may not be present
+        if (records[name].has_key("address")):
+            line += ("%" + str(maxlengths["address"]) + "s\n") % records[name]["address"]
+        else:
+            line += ("%" + str(maxlengths["address"]) + "s\n") % ""
+
+        fout.write(line)
+
+    # Close the output file
+    fout.close()
+
+
 
 
 #
