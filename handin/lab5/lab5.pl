@@ -20,10 +20,8 @@ while (<$fin>) {
     @fields = split /,/;
     foreach $f (@fields) {
 	# split each field into 'name' and 'value'
-	@assign = split /=/, $f;
-	$name = $assign[0];
+	($name, $value) = split /=/, $f;
 	$name =~ s/^\s+|\s+$//g;
-	$value = $assign[1];
 	$value =~ s/^\s+|\s+$//g;
 
 	# update the maximum length
@@ -74,7 +72,7 @@ foreach $name (@sorted_records) {
     $line = sprintf("%" . $maxlengths{"name"} . "s  ", $name);
     foreach $f (@sorted_fields) {
 	if (($f ne "name") && ($f ne "address")) {
-	    print "checking record $f for name $name: $records{$name}{$f}\n";
+	    print "checking record $f for name $name: ", $records{$name}{$f}, "\n";
 	    $line .= sprintf("%" . $maxlengths{$f} . "s  ",
 			     (exists $records{$name}{$f}) ?
 			      $records{$name}{$f} : "");
