@@ -61,32 +61,32 @@ close($fin) ||
 my @sorted_fields = sort(keys(%maxlengths));
 
 # Print the header
-my $line = sprintf("%" . $maxlengths{"name"} . "s  ", "name");
+my $line = sprintf("%" . $maxlengths{"name"} . "s", "name");
 
 foreach my $n (@sorted_fields) {
     if (($n ne "name") && ($n ne "address")) {
-	$line .= sprintf("%" . $maxlengths{$n} . "s  ", $n);
+	$line .= sprintf("  %" . $maxlengths{$n} . "s", $n);
     }
 }
-$line .= sprintf("%" . $maxlengths{"address"} . "s\n", "address");
+$line .= "  address\n";
 print $fout $line;
 
 # Sort the dictionary
 my @sorted_records = sort(keys(%records));
 foreach my $name (@sorted_records) {
-    $line = sprintf("%" . $maxlengths{"name"} . "s  ", $name);
+    $line = sprintf("%" . $maxlengths{"name"} . "s", $name);
     foreach my $f (@sorted_fields) {
 	if (($f ne "name") && ($f ne "address")) {
-	    $line .= sprintf("%" . $maxlengths{$f} . "s  ",
+	    $line .= sprintf("  %" . $maxlengths{$f} . "s",
 			     (exists $records{$name}{$f}) ?
 			      $records{$name}{$f} : "");
 	}
     }
 
     # address may not be present
-    $line .= sprintf("%" . $maxlengths{"address"} . "s\n",
-		     (exists $records{$name}{"address"}) ?
-		     $records{$name}{"address"} : "");
+    $line .= "  " . 
+	(exists($records{$name}{"address"}) ? $records{$name}{"address"} : "") . 
+	"\n";
 
     print $fout $line;
 }

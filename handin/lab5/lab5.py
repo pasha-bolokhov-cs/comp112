@@ -73,28 +73,28 @@ def main():
     sorted_fields = sorted(maxlengths)
 
     # Print the header
-    line = ("%" + str(maxlengths["name"]) + "s  ") % "name"
+    line = ("%" + str(maxlengths["name"]) + "s") % "name"
     for n in sorted_fields:
         if ((n != "name") and (n != "address")):
-            line += ("%" + str(maxlengths[n]) + "s  ") % n
-    line += ("%" + str(maxlengths["address"]) + "s\n") % "address"
+            line += ("  %" + str(maxlengths[n]) + "s") % n
+    line += "  address\n"
     fout.write(line)
 
     # Sort the dictionary
     sorted_records = sorted(records)
     for name in sorted_records:
-        line = ("%" + str(maxlengths["name"]) + "s  ") % name
+        line = ("%" + str(maxlengths["name"]) + "s") % name
         for f in sorted_fields:
             if ((f != "name") and (f != "address")):
                 if (records[name].has_key(f)):
-                    line += ("%" + str(maxlengths[f]) + "s  ") % records[name][f]
+                    line += ("  %" + str(maxlengths[f]) + "s") % records[name][f]
                 else:
-                    line += ("%" + str(maxlengths[f]) + "s  ") % ""
+                    line += ("  %" + str(maxlengths[f]) + "s") % ""
         # address may not be present
         if (records[name].has_key("address")):
-            line += ("%" + str(maxlengths["address"]) + "s\n") % records[name]["address"]
+            line += "  " + records[name]["address"] + "\n"
         else:
-            line += ("%" + str(maxlengths["address"]) + "s\n") % ""
+            line += "\n"
 
         fout.write(line)
 
