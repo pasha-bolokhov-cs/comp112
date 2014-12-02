@@ -84,8 +84,7 @@ foreach my $name (@sorted_records) {
     }
 
     # address may not be present
-    $line .= "  " . 
-	(exists($records{$name}{"address"}) ? $records{$name}{"address"} : "") . 
+    $line .= (exists($records{$name}{"address"}) ? ("  " . $records{$name}{"address"}) : "") . 
 	"\n";
 
     print $fout $line;
