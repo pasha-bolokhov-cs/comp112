@@ -1,6 +1,9 @@
 #!/usr/bin/env perl
 #
 
+use strict;
+use warnings;
+
 # Check if we have proper arguments
 die "format: %0 <in-file> <out-file>\n" if ($#ARGV + 1 < 2);
 
@@ -17,9 +20,11 @@ my $line_name;
 while (<$fin>) {
     my %rec;
     chomp;
-    @fields = split /,/;
-    foreach $f (@fields) {
+    my @fields = split /,/;
+    foreach my $f (@fields) {
 	# split each field into 'name' and 'value'
+	my $name;
+	my $value;
 	($name, $value) = split /=/, $f;
 	$name =~ s/^\s+|\s+$//g;
 	$value =~ s/^\s+|\s+$//g;
@@ -45,7 +50,7 @@ while (<$fin>) {
 	die "name \`$line_name\' occurs more than once\n";
     }
 
-    $records{$line_name} = %rec;
+    $records{$line_name} = \%rec;
 } # while (<$fin>)
 
 # Close the input file
@@ -53,26 +58,25 @@ close($fin) ||
     die "$0: can't close \`$ARGV[0]\': $!\n";
 
 # Sort the field names
-@sorted_fields = sort(keys(%maxlengths));
+my @sorted_fields = sort(keys(%maxlengths));
 
 # Print the header
-$line = sprintf("%" . $maxlengths{"name"} . "s  ", "name");
+my $line = sprintf("%" . $maxlengths{"name"} . "s  ", "name");
 
-foreach $n (@sorted_fields) {
+foreach my $n (@sorted_fields) {
     if (($n ne "name") && ($n ne "address")) {
 	$line .= sprintf("%" . $maxlengths{$n} . "s  ", $n);
     }
 }
 $line .= sprintf("%" . $maxlengths{"address"} . "s\n", "address");
-print $line;
+print $fout $line;
 
 # Sort the dictionary
-@sorted_records = sort(keys(%records));
-foreach $name (@sorted_records) {
+my @sorted_records = sort(keys(%records));
+foreach my $name (@sorted_records) {
     $line = sprintf("%" . $maxlengths{"name"} . "s  ", $name);
-    foreach $f (@sorted_fields) {
+    foreach my $f (@sorted_fields) {
 	if (($f ne "name") && ($f ne "address")) {
-	    print "checking record $f for name $name: ", $records{$name}{$f}, "\n";
 	    $line .= sprintf("%" . $maxlengths{$f} . "s  ",
 			     (exists $records{$name}{$f}) ?
 			      $records{$name}{$f} : "");
@@ -84,7 +88,7 @@ foreach $name (@sorted_records) {
 		     (exists $records{$name}{"address"}) ?
 		     $records{$name}{"address"} : "");
 
-    print $line;
+    print $fout $line;
 }
 
 # Close the output file
